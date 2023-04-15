@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: ad-rc
+  labels:
+    type: gui
+    author: siva
+spec:
+  replicas: 3
+  template:
+    metadata:
+      name: ad-pod
+      labels:
+        type: gui
+        author: siva
+    spec:
+      containers:
+        - name: myadminer 
+          image: adminer
+          ports:
+            - containerPort: 8080
+              hostPort: 8080

@@ -1,0 +1,25 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: ghost-deployment
+  labels:
+    type: CMS
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      type: CMS
+  template:
+    metadata:
+      name: ghost-pod
+      labels: 
+        type: CMS
+        author: ghost
+    spec:
+      containers:
+        - name: myghost
+          image: ghost
+          env:
+            - name: NODE_ENV
+              value: development

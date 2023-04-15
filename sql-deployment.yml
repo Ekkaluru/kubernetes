@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sql-deployment
+  labels:
+    type: db
+      
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      type: mydb
+      author: ibrahim
+  template:
+    metadata:
+      name: sql-pod
+      labels: 
+        type: mydb
+        author: ibrahim
+    spec:
+      containers:
+        - name: sql
+          image: mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: siva

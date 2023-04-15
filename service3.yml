@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: sql-service
+  labels:
+    author: siva
+spec:
+  type: ClusterIP
+  ports:
+    - targetPort: 3306
+      port: 3306
+  selector:
+    type: mydb
+    author: ibrahim
+

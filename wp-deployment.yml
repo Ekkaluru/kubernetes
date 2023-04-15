@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wp-deploy
+  labels:
+    type: https
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      type: https
+  template:
+    metadata:
+      name: wp-pod
+      labels:
+        type: https
+        author: siva
+    spec:
+      containers:
+        - name: mywp
+          image: wordpress

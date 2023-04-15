@@ -1,0 +1,62 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: my-pvc3
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: "10Gi"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx-svc
+spec:
+  clusterIP: None
+  ports:
+    - name: tcp
+      protocol: TCP
+      port: 8080
+  selector:
+    author: siva
+---
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: nginx
+  labels:
+    author: siva
+spec:
+  replicas: 3
+  serviceName: nginx-svc
+  selector:
+    matchLabels:
+      author: siva
+  template:
+    metadata:
+      name: mynginx
+      labels:
+        author: siva
+    spec:
+      containers:
+        - name: mynginx
+          image: nginx
+          ports:
+            - name: tcp
+              containerPort: 80
+          volumeMounts:
+            - name: nginx-vol
+              mountPath: /usr/share/nginx/html
+  volumeClaimTemplates:
+    - metadata:
+        name: nginx-vol
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 3Gi              

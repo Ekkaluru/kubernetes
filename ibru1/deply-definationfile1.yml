@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ghost-deploy
+  labels:
+    author: ibru
+    type: cms
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      author: ibru
+      type: cms
+  template:
+    metadata:
+      name: ghost-pod
+      labels:
+        type: cms
+        author: ibru
+    spec:
+      containers:
+        - name: ghost
+          image: ghost
+          ports:
+            - containerPort: 2368
+              hostPort: 9090
+          env:
+            - name: NODE_ENV
+              value: development
+    

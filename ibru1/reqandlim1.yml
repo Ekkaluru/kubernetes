@@ -1,0 +1,30 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: jen-deploy
+  labels:
+    author: siva
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      author: siva
+  template:
+    metadata:
+      name: jen-pod
+      labels:
+        author: siva
+    spec:
+      containers:
+        - name: myjen
+          image: jenkins/jenkins
+          resources:
+            requests:
+              memory: "200Mi"
+              cpu: "400m"
+            limits:
+              memory: "400Mi"
+              cpu: "800m"
+
+

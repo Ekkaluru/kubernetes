@@ -1,0 +1,25 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rangoli-dep
+  labels:
+    name: siva
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: siva
+  template:
+    metadata:
+      name: paadu-name
+      labels:
+        name: siva
+    spec:
+      containers:
+        - name: sivaaaaa
+          image: mysql:oracle
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: sivaa
+

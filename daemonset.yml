@@ -1,0 +1,22 @@
+---
+kind: DaemonSet
+apiVersion: apps/v1
+metadata:
+  name: nginx-daemon
+  labels:
+    type: proxy
+spec:
+  selector:
+    matchLabels:
+      type: proxy
+  template:
+    metadata:
+      name: nginx-pod
+      labels:
+        type: proxy
+        author: siva
+    spec: 
+      containers:
+        - name: mynginx
+          image: nginx
+...

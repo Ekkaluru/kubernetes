@@ -1,0 +1,19 @@
+--
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  labels:
+    author: intelliqit
+spec:
+  containers:
+    - name: mywp
+      image: wordpress
+      volumeMounts:
+        - name: my-volume
+          mountPath: /var/www/html
+  volumes:
+    - name: my-volume
+      persistentVolumeClaim:
+        claimName: my-pvc
+...

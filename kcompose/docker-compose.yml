@@ -1,0 +1,16 @@
+---
+version: '3'
+services:
+  myghost:
+    image: ghost
+    deploy:
+      replicas: 3
+
+    environment:
+       NODE_ENV: development
+    ports:
+      - 9090:2368
+  mydb:
+    image: mysql
+    environment:
+       MYSQL_ROOT_PASSWORD: siva

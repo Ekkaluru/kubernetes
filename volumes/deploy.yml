@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-dp
+  labels:
+    type: press
+spec:
+  replicas: 3
+  selector: 
+    matchLabels:
+      type: press
+  template:
+    metadata:
+      name: wp-pod
+      labels:
+        type: press
+    spec:
+      containers:
+        - name: mywp
+          image: wordpress
+          volumeMounts:
+            - name: wp-volume
+              mountPath: /var/www/html
+      volumes:
+        - name: wp-volume
+          persistentVolumeClaim:
+            claimName: my-pvc1
+

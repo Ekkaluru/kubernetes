@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tomcat-rs
+  labels:
+    author: ibru
+    type: appserver
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      type: appserver
+  template:
+    metadata:
+      name: mytomcat
+      labels:
+        type: appserver
+        author: ibru
+    spec:
+      containers:
+      - name: mytomcat
+        image: tomee
+        ports:
+          - containerPort: 8080
+            hostPort: 9090
+    
+    
+  
